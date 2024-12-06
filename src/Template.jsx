@@ -6,6 +6,7 @@ import CSS from './CSS';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { Octokit } from '@octokit/rest';
+import saveToGitHub from './components/saveToGitHub';
 
 const Template = () => {
   const [html, setHtml] = useState('');
@@ -42,29 +43,29 @@ const Template = () => {
   };
 
   // Save to GitHub
-  const saveToGitHub = async () => {
-    const octokit = new Octokit({ auth: 'your_personal_access_token' }); // Replace with your token
-    const content = `
-      <!DOCTYPE html>
-      <html>
-        <head><style>${css}</style></head>
-        <body>${html}<script>${js}</script></body>
-      </html>
-    `;
-    try {
-      await octokit.repos.createOrUpdateFileContents({
-        owner: 'your_github_username',
-        repo: 'your_repo_name',
-        path: 'index.html',
-        message: 'Code from Online Editor',
-        content: btoa(content),
-      });
-      alert('Files saved to GitHub successfully!');
-    } catch (error) {
-      console.error(error);
-      alert('Failed to save to GitHub.');
-    }
-  };
+  // const saveToGitHub = async () => {
+  //   const octokit = new Octokit({ auth: 'your_personal_access_token' }); // Replace with your token
+  //   const content = `
+  //     <!DOCTYPE html>
+  //     <html>
+  //       <head><style>${css}</style></head>
+  //       <body>${html}<script>${js}</script></body>
+  //     </html>
+  //   `;
+  //   try {
+  //     await octokit.repos.createOrUpdateFileContents({
+  //       owner: 'your_github_username',
+  //       repo: 'your_repo_name',
+  //       path: 'index.html',
+  //       message: 'Code from Online Editor',
+  //       content: btoa(content),
+  //     });
+  //     alert('Files saved to GitHub successfully!');
+  //   } catch (error) {
+  //     console.error(error);
+  //     alert('Failed to save to GitHub.');
+  //   }
+  // };
 
   return (
     <>
@@ -97,7 +98,10 @@ const Template = () => {
           <button onClick={downloadAll} className="bg-green-500 text-white px-4 py-2 rounded">
             Download All Files as ZIP
           </button>
-          <button onClick={saveToGitHub} className="bg-blue-500 text-white px-4 py-2 rounded">
+          <button
+            onClick={() => saveToGitHub(html, css, js)}
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+          >
             Save to GitHub
           </button>
         </div>
