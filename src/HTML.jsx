@@ -18,18 +18,15 @@
 // }
 
 // export default HTML
-import React, { useState } from "react";
+
+
+import React from "react";
 import Editor from "./components/Editor";
 
-const HTML = ({ value, onChange }) => {
-  const [html, setHtml] = useState(value);
-
-  const handleChange = (newValue) => {
-    setHtml(newValue);
-    onChange(newValue); // Pass changes to the parent
-  };
-
-  return <Editor language="HTML" value={html} onChange={handleChange} />;
-};
+const HTML = ({ value, onChange }) => (
+  <div className="h-screen">
+    <Editor language="HTML" value={value} onChange={onChange} />
+  </div>
+);
 
 export default HTML;
