@@ -238,6 +238,17 @@ const Template = () => {
           <AutoHeightTextarea value={js} onChange={() => {}} placeholder="" />
         </div>
       </div>
+      <div className="mt-4 flex justify-center space-x-4">
+           <button onClick={downloadAll} className="bg-green-500 text-white px-4 py-2 rounded">
+             Download All Files as ZIP
+           </button>
+           <button
+            onClick={() => saveToGitHub(html, css, js)}
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+          >
+            Save to GitHub
+          </button>
+        </div>
     </div>
   </>
 );
