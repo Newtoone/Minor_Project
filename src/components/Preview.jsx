@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Preview = ({ html, css, js }) => {
   const iframeSrcDoc = `
@@ -16,9 +16,10 @@ const Preview = ({ html, css, js }) => {
 
   return (
     <iframe
-      title="preview"
+      title="Code Preview"
       srcDoc={iframeSrcDoc}
       className="w-full h-full border-none"
+      sandbox="allow-scripts"
     />
   );
 };
